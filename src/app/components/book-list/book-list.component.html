@@ -1,0 +1,8 @@
+<div *ngFor="let book of books">
+    <h2>{{ book.title }}</h2>
+    <img [src]="book.imageUrl" alt="{{ book.title }}" width="100">
+    <p>ISBN: {{ book.isbn13 }}</p>
+    <button (click)="deleteBook(book.id)">Delete</button>
+    <a [routerLink]="['/edit-book', book.id]">Edit</a>
+  </div>
+  

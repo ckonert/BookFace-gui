@@ -1,0 +1,20 @@
+<form [formGroup]="bookForm" (ngSubmit)="saveBook()">
+    <div>
+      <label for="title">Title:</label>
+      <input id="title" formControlName="title" />
+    </div>
+    <div>
+      <label for="isbn13">ISBN-13:</label>
+      <input id="isbn13" formControlName="isbn13" />
+    </div>
+    <div>
+      <label for="authorId">Author:</label>
+      <input id="authorId" formControlName="authorId" />
+    </div>
+    <div>
+      <label for="imageUrl">Image URL:</label>
+      <input id="imageUrl" formControlName="imageUrl" />
+    </div>
+    <button type="submit">Save</button>
+  </form>
+  

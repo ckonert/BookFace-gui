@@ -1,0 +1,7 @@
+<div *ngFor="let author of authors">
+    <h2>{{ author.firstname }} {{ author.lastname }}</h2>
+    <img [src]="author.imageUrl" alt="{{ author.firstname }} {{ author.lastname }}" width="100">
+    <button (click)="deleteAuthor(author.id)">Delete</button>
+    <a [routerLink]="['/edit-author', author.id]">Edit</a> 
+  </div>
+  

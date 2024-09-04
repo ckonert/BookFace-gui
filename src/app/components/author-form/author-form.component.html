@@ -1,0 +1,17 @@
+<form [formGroup]="authorForm" (ngSubmit)="saveAuthor()">
+<div>
+    <label for="firstname">First name:</label>
+    <input id="firstname" formControlName="firstname" />
+</div>
+<div>
+    <label for="lastname">Last name:</label>
+    <input id="lastname" formControlName="lastname" />
+</div>
+<div>
+    <label for="imageUrl">Image URL:</label>
+    <input id="imageUrl" formControlName="imageUrl" />
+</div>
+<button type="submit">Save</button>
+</form>
+  
+  

@@ -1,7 +1,28 @@
-<div *ngFor="let author of authors">
-    <h2>{{ author.firstname }} {{ author.lastname }}</h2>
-    <img [src]="author.imageUrl" alt="{{ author.firstname }} {{ author.lastname }}" width="100">
-    <button (click)="deleteAuthor(author.id)">Delete</button>
-    <a [routerLink]="['/edit-author', author.id]">Edit</a> 
+<div class="mx-auto max-w-md overflow-hidden rounded-lg bg-white shadow">
+  <div class="p-4">
   </div>
-  
+  <div class="p-4">
+    <div *ngFor="let author of authors" class="border border-gray-300 rounded-lg p-4 flex items-start">
+      <!-- Author image on the left -->
+      <img [src]="author.imageUrl" alt="{{ author.firstname }} {{ author.lastname }}" class="w-24 h-auto">
+
+      <!-- Author details (name and buttons) on the right -->
+      <div>
+        <h2 class="text-xl font-medium text-gray-900">{{ author.firstname }} {{ author.lastname }}</h2>
+
+        <!-- Buttons -->
+
+        <div class="mt-4 flex gap-4 px-4">
+          <span
+            class="inline-flex items-left gap-1 rounded-full bg-red-50 px-2 py-1 text-xs font-semibold text-red-600">
+            <button (click)="deleteAuthor(author.id)">Delete</button>
+          </span>
+          <span
+            class="inline-flex items-left gap-1 rounded-full bg-indigo-50 px-2 py-1 text-xs font-semibold text-indigo-600">
+            <a [routerLink]="['/edit-author', author.id]">Edit</a>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

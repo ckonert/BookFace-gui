@@ -1,28 +1,27 @@
-<!-- Application Title -->
-<header style="text-align: center; background-color: #4CAF50; color: white; padding: 1em 0;">
-  <h1 class="text-3xl font-bold underline">Bookface, for looking at books</h1>
+<!-- Header -->
+<header class="bg-blue-500 text-white text-center py-6">
+  <h1 class="text-4xl font-extrabold tracking-tight">Bookface - For Looking at Books</h1>
 </header>
 
 <!-- Navigation Menu -->
-<nav style="background-color: #333; padding: 0.5em 0;">
-  <ul style="list-style: none; display: flex; justify-content: center; margin: 0; padding: 0;">
-    <li style="margin: 0 1em;"><a [routerLink]="['/books']" routerLinkActive="active" style="color: white; text-decoration: none;">Books</a></li>
-    <li style="margin: 0 1em;"><a [routerLink]="['/authors']" routerLinkActive="active" style="color: white; text-decoration: none;">Authors</a></li>
-    <li style="margin: 0 1em;"><a [routerLink]="['/add-book']" routerLinkActive="active" style="color: white; text-decoration: none;">Add Book</a></li>
-    <li style="margin: 0 1em;"><a [routerLink]="['/add-author']" routerLinkActive="active" style="color: white; text-decoration: none;">Add Author</a></li>
+<nav class="bg-gray-800 py-4">
+  <ul class="flex justify-center space-x-8">
+    <li><a [routerLink]="['/books']" routerLinkActive="active" class="text-white hover:text-blue-400 transition-colors duration-300">Books</a></li>
+    <li><a [routerLink]="['/authors']" routerLinkActive="active" class="text-white hover:text-blue-400 transition-colors duration-300">Authors</a></li>
+    <li><a [routerLink]="['/add-book']" routerLinkActive="active" class="text-white hover:text-blue-400 transition-colors duration-300">Add Book</a></li>
+    <li><a [routerLink]="['/add-author']" routerLinkActive="active" class="text-white hover:text-blue-400 transition-colors duration-300">Add Author</a></li>
   </ul>
 </nav>
 
 <!-- Divider -->
-<hr>
+<hr class="my-4 border-gray-200">
 
 <!-- Main Content Area -->
-<main style="padding: 2em;">
-  <!-- Routed views will be displayed here -->
+<main class="container mx-auto p-8 bg-white shadow-lg rounded-lg">
   <router-outlet></router-outlet>
 </main>
 
 <!-- Footer -->
-<footer style="text-align: center; background-color: #333; color: white; padding: 1em 0;">
+<footer class="bg-gray-800 text-white text-center py-6 mt-8">
   <p>&copy; 2024 Bookface. All Rights Reserved.</p>
 </footer>

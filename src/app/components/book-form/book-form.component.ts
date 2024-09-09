@@ -14,6 +14,11 @@ import { CommonModule } from '@angular/common';
 export class BookFormComponent implements OnInit {
   bookForm: FormGroup;
   bookId?: number;
+  isEditMode: any;
+  authors: any;
+  message: string = '';      // Message text
+  messageType: string = '';  // 'success' or 'error'
+  imageUrlPreview: string = '';  // Preview URL for the image
 
   constructor(
     private bookService: BookService,
@@ -33,16 +38,40 @@ export class BookFormComponent implements OnInit {
     if (this.bookId) {
       this.bookService.getBook(this.bookId).subscribe(data => {
         this.bookForm.patchValue(data);
+        this.imageUrlPreview = data.imageUrl;  // Set initial image preview if editing
       });
     }
+
+    // Listen to changes in the imageUrl field and update the preview
+    this.bookForm.get('imageUrl')?.valueChanges.subscribe((url: string) => {
+      this.imageUrlPreview = url;  // Update the preview URL as user types
+    });
   }
 
   saveBook(): void {
     if (this.bookForm.valid) {
       if (this.bookId) {
-        this.bookService.updateBook(this.bookId, this.bookForm.value).subscribe();
+        this.bookService.updateBook(this.bookId, this.bookForm.value).subscribe(
+          () => {
+            this.message = 'The book has been updated successfully!';
+            this.messageType = 'success';
+          },
+          (error) => {
+            this.message = 'Something went wrong while updating the book.';
+            this.messageType = 'error';
+          }
+        );
       } else {
-        this.bookService.createBook(this.bookForm.value).subscribe();
+        this.bookService.createBook(this.bookForm.value).subscribe(
+          () => {
+            this.message = 'The book has been created successfully!';
+            this.messageType = 'success';
+          },
+          (error) => {
+            this.message = 'Something went wrong while creating the book.';
+            this.messageType = 'error';
+          }
+        );
       }
     }
   }

@@ -1,21 +1,21 @@
 <div class="mx-auto max-w-md overflow-hidden rounded-lg bg-white shadow"  id="booklist">
   <div class="p-4">
-    <div id="book" *ngFor="let book of books" class="border border-gray-300 rounded-lg p-4 flex items-start">
-      <img [src]="book.imageUrl" alt="{{ book.title }}" id="image" class="w-24 h-auto">
+    <div *ngFor="let book of books" class="border border-gray-300 rounded-lg p-4 flex items-start" id="book">
+        <img [src]="book.imageUrl" alt="{{ book.title }}" id="image" class="w-24 h-auto">
 
-      <div>
-        <h3 class="text-xl font-medium text-gray-900 p-4" id="title">{{ book.title }}</h3>
-        <p class="px-4" id="isbn">ISBN: {{ book.isbn13 }}</p>
+        <div>
+          <h3 class="text-xl font-medium text-gray-900 p-4" id="title">{{ book.title }}</h3>
+          <p class="px-4" id="isbn">ISBN: {{ book.isbn13 }}</p>
 
-        <div class="mt-4 flex gap-4 px-4">
-          <span
-            class="inline-flex items-left gap-1 rounded-full bg-red-50 px-2 py-1 text-xs font-semibold text-red-600">
-            <button id="deletebutton" (click)="deleteBook(book.id)">Delete</button>
-          </span>
-          <span
-            class="inline-flex items-left gap-1 rounded-full bg-indigo-50 px-2 py-1 text-xs font-semibold text-indigo-600">
-            <button id="editbutton" [routerLink]="['/edit-book', book.id]">Edit</button>
-          </span>
+          <div class="mt-4 flex gap-4 px-4">
+            <span
+              class="inline-flex items-left gap-1 rounded-full bg-red-50 px-2 py-1 text-xs font-semibold text-red-600">
+              <button id="deletebutton" (click)="deleteBook(book.id)">Delete</button>
+            </span>
+            <span
+              class="inline-flex items-left gap-1 rounded-full bg-indigo-50 px-2 py-1 text-xs font-semibold text-indigo-600">
+              <button id="editbutton" [routerLink]="['/edit-book', book.id]">Edit</button>
+            </span>
         </div>
       </div>
     </div>

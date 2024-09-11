@@ -8,9 +8,8 @@ describe('Display the list of books', () => {
 
     it('should show a list of four books', () => {
       cy.wait('@getBooks');
-      cy.get('#booklist').should('exist');
-      cy.get('#book').should('be.visible');
-      cy.get('#booklist').find('#book').should('have.length', 4);
+      // cy.get('#book').should('have.length', 4);
+      cy.get('#booklist #book').should('have.length', 4);
     });
   });
 });

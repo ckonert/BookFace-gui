@@ -1,4 +1,18 @@
+<h1 class="text-center text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl p-6">
+  <span class="text-transparent bg-clip-text bg-gradient-to-tr to-cyan-500 from-blue-600">
+      Books
+  </span>
+</h1>
 <div class="mx-auto max-w-md overflow-hidden rounded-lg bg-white shadow"  id="booklist">
+
+  <button [routerLink]="['/add-book']" routerLinkActive="active" class="inline-flex items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" >
+    <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="12" y1="5" x2="12" y2="19"></line>
+      <line x1="5" y1="12" x2="19" y2="12"></line>
+    </svg>
+    <span>Add Book</span>
+  </button>
+
   <div class="p-4">
     <div *ngFor="let book of books" class="border border-gray-300 rounded-lg p-4 flex items-start" id="book">
         <img [src]="book.imageUrl" alt="{{ book.title }}" id="image" class="w-24 h-auto">

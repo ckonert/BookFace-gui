@@ -3,6 +3,8 @@ import { BookService } from '../../services/book.service';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { AuthorSelectionModalComponent } from '../../author-selection-modal/author-selection-modal.component';
 
 @Component({
   selector: 'app-book-form',
@@ -14,6 +16,7 @@ import { CommonModule } from '@angular/common';
 export class BookFormComponent implements OnInit {
   bookForm: FormGroup;
   bookId?: number;
+  selectedAuthor: any;
   isEditMode: any;
   authors: any;
   message: string = '';      // Message text
@@ -23,7 +26,8 @@ export class BookFormComponent implements OnInit {
   constructor(
     private bookService: BookService,
     private route: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public dialog: MatDialog
   ) {
     this.bookForm = this.fb.group({
       title: ['', Validators.required],
@@ -47,6 +51,18 @@ export class BookFormComponent implements OnInit {
       this.imageUrlPreview = url;  // Update the preview URL as user types
     });
   }
+
+    // Open the Author Selection Modal
+    openAuthorSelection(): void {
+      const dialogRef = this.dialog.open(AuthorSelectionModalComponent);
+  
+      dialogRef.afterClosed().subscribe(selectedAuthor => {
+        if (selectedAuthor) {
+          this.selectedAuthor = selectedAuthor;
+          this.bookForm.patchValue({ authorId: selectedAuthor.id });
+        }
+      });
+    }
 
   saveBook(): void {
     if (this.bookForm.valid) {

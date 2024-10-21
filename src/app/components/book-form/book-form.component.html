@@ -16,7 +16,15 @@
 
   <div class="mb-4">
     <label for="authorId" class="block text-gray-700 font-bold mb-2">Author:</label>
-    <input id="authorId" formControlName="authorId" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500" />
+    <div class="flex items-center gap-2">
+      <button type="button" (click)="openAuthorSelection()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
+        Select Author
+      </button>
+      <input id="authorId" formControlName="authorId" class="flex-grow px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500" readonly />
+    </div>
+    <p *ngIf="selectedAuthor" class="block text-gray-700 font-medium mb-2">
+      Selected Author: {{ selectedAuthor.firstname }} {{ selectedAuthor.lastname }}
+    </p>
   </div>
 
   <div class="mb-4">

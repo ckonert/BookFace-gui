@@ -1,0 +1,38 @@
+<h1 class="text-center text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl p-6">
+  <span class="text-transparent bg-clip-text bg-gradient-to-tr to-cyan-500 from-blue-600">
+      Authors
+  </span>
+</h1>
+
+<div class="mx-auto max-w-md overflow-hidden rounded-lg bg-white shadow"  id="auhtorlist">
+
+  <button [routerLink]="['/add-author']" routerLinkActive="active" class="inline-flex items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" >
+    <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="12" y1="5" x2="12" y2="19"></line>
+      <line x1="5" y1="12" x2="19" y2="12"></line>
+    </svg>
+    <span>Add Author</span>
+  </button>
+
+  <div class="p-4">
+    <div *ngFor="let author of authors" class="border border-gray-300 rounded-lg p-4 flex items-start" id="author">
+      <img [src]="author.imageUrl" alt="{{ author.firstname }} {{ author.lastname }}" class="w-24 h-auto">
+
+      <div>
+        <h3 class="text-xl font-medium text-gray-900 p-4">{{ author.firstname }} {{ author.lastname }}</h3>
+
+        <div class="mt-4 flex gap-4 px-4">
+          <span
+            class="inline-flex items-left gap-1 rounded-full bg-red-50 px-2 py-1 text-xs font-semibold text-red-600">
+            <button (click)="deleteAuthor(author.id)">Delete</button>
+          </span>
+          <span
+            class="inline-flex items-left gap-1 rounded-full bg-indigo-50 px-2 py-1 text-xs font-semibold text-indigo-600">
+            <button [routerLink]="['/edit-author', author.id]">Edit</button>
+          </span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

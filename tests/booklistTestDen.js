@@ -10,11 +10,13 @@ import GeneralButtons from '../page_models/general_buttons'
 import { Selector } from 'testcafe';
 
 // PAGE FIXTURE
+// To add: fixtures for several pages in a central location instead of hardcoding (Books/add-author, etc.)
 fixture('Getting started')
   .page('http://localhost:4200');
 
-// TEST 1 (Not really a test, there's no assertion, just for doing some functionalities)
-// Currently fails: no book is added
+// TEST 1: Click through website and add Book.
+// To add: Data model to add books to instead of hardcoding (randomized book, for example)
+// CURRENTLY FAILS, as no book is actually added (Bug?)
   test('Click through Website and then add a book', async t => {
     const bookTitle= "Judo: De Nieuwe Basisleermethode";
     const isbn     = "9789051210354";
@@ -32,9 +34,9 @@ fixture('Getting started')
         typeText(AddBooksPage.imageURLTextBox, imageurl).
         click(GeneralButtons.saveButton).
         click(Banner.booksButton).
-        expect(BooksPage.authorName.withText(author).exists).ok(). //Book with specific author name exists
-        expect(BooksPage.bookTitle.withText(bookTitle).exists).ok().
-        expect(BooksPage.isbn.withText(isbn).exists).ok();
+        expect(BooksPage.authorName.withText(author).exists).ok(). //Assert: Book with specific author name exists
+        expect(BooksPage.bookTitle.withText(bookTitle).exists).ok(). // Assert: Book with specific title exists
+        expect(BooksPage.isbn.withText(isbn).exists).ok(); // Assert: Book with specific isbn exists
 //        .expect(BooksPage.authorName.contains(author));
   })
 
@@ -43,6 +45,7 @@ fixture('Getting started')
 
 // TEST 2
 // This test still requires manual deletion of already existing author
+// To do: Make clicking delete less scuffed (it's very hardcoded right now)
   test('Add an author, check author is there, delete author, check author is gone', async t => {
     const firstName     = "Anton";
     const lastName      = "Geesink";
@@ -52,17 +55,17 @@ fixture('Getting started')
 
     await t.
         click(Banner.authorButton).
-        expect(AuthorsPage.authorName.withText(fullName).exists).notOk(). // Author with fullname does not (yet) exist
+        expect(AuthorsPage.authorName.withText(fullName).exists).notOk(). //Assert: Author with fullname does not (yet) exist
         click(GeneralButtons.addButton).
         typeText(AddAuthorsPage.firstNameTextBox, firstName).
         typeText(AddAuthorsPage.lastNameTextBox, lastName).
         typeText(AddAuthorsPage.imageURLTextBox, imageurl).
         click(GeneralButtons.saveButton).
         click(Banner.authorButton).
-        expect(AuthorsPage.authorName.withText(fullName).exists).ok(). //Author with fullname Exists
+        expect(AuthorsPage.authorName.withText(fullName).exists).ok(). //Assert: Author with fullname Exists
         click(Selector('main h3').withText(fullName).parent(1).find("button").withText('Delete')).
         //^^ This is an incredibly scuffed way of doing things but it'll do for now
-        expect(AuthorsPage.authorName.withText(fullName).exists).notOk() // Author with fullname does not exist (anymore)
+        expect(AuthorsPage.authorName.withText(fullName).exists).notOk() //Assert:  Author with fullname does not exist (anymore)
   })
 
 
@@ -70,6 +73,7 @@ fixture('Getting started')
 
 // TEST 3
 // This test makes an API call to the back-end and checks that one book's title and isbn in the front-end fits with the DB
+// To do 1: Choose a random book title instead of top one
   test('Add an author, check author is there, delete author, check author is gone', async t => {
     const dbResults     = await t.request('http://localhost:8080/books/');
     const bookTitle     = dbResults.body[1].title;
@@ -78,8 +82,8 @@ fixture('Getting started')
     console.log(bookISBN);
     await t.
       click(Banner.booksButton).
-      expect(BooksPage.bookTitle.withText(bookTitle).exists).ok().
-      expect(BooksPage.isbn.withText(bookISBN).exists).ok();
+      expect(BooksPage.bookTitle.withText(bookTitle).exists).ok(). //Assert: Checks top Booktitle with booktitle from DB
+      expect(BooksPage.isbn.withText(bookISBN).exists).ok(); //Assert: checks top book isbn with isbn from DB
   })
 
 
